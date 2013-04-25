@@ -1,0 +1,27 @@
+{
+  "name": "Test",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.6.18",
+    "npm": "1.1.9"
+  },
+  "private": true,
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon server.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "mongoose": "latest",
+    "connect-mongo": "latest",
+    "async": "latest",
+    "jade": "latest",
+    "view-helpers": "latest",
+    "passport": "latest",
+    "passport-facebook": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest",
+    "mocha": "latest",
+    "should": "latest"
+  }
+}

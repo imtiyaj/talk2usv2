@@ -1,0 +1,5 @@
+node_modules
+.idea/.name
+.DS_store
+.idea/*
+*.scssc
