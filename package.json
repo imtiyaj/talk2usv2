@@ -17,7 +17,11 @@
     "jade": "latest",
     "view-helpers": "latest",
     "passport": "latest",
-    "passport-facebook": "latest"
+    "passport-local": "latest",
+    "passport-facebook": "latest",
+    "passport-google-oauth": "latest",
+    "socket.io": "latest",
+    "jshare": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",

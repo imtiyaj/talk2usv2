@@ -6,6 +6,7 @@
 var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , helpers = require('view-helpers')
+  , jshare = require('jshare');
 
 module.exports = function (app, config, passport) {
   app.set('showStackError', true)
@@ -36,6 +37,8 @@ module.exports = function (app, config, passport) {
       app.use(passport.initialize())
       app.use(passport.session())
     }
+
+    app.use(jshare('shared'));
 
     // routes should be at the last
     app.use(app.router)

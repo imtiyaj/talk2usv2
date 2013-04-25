@@ -4,5 +4,9 @@
  */
 
 exports.index = function (req, res) {
-  res.render('home/index', {title: 'index'})
+  if (req.user) {
+    res.render('home/index-foundation', { user: req.user })
+  } else {
+    res.render('home/index-foundation');
+  }
 }
