@@ -1,41 +1,20 @@
-extends ../layouts/layout-foundation
+extends auth-foundation
 
-block content
-  .row
-    .large-12.columns
-      .panel.callout
+block localauth
+  .large-12.columns
+    form(action="/users/session", method='post')
+      fieldset
+        legend or
+        p(style='color:red').error= message
         .row
           .large-12.columns
-            a(href='#')
-              h1.text-center Talk2us
+            input(type="text", placeholder="Your email id", name='email')
+        .row
+          .large-10.columns
+            input(type="password", placeholder="Password", name='password')
+          a(href="#") (forgot?)
         .row
           .large-12.columns
-            h4.subheader.text-center Sign-in using
-  .row
-    .large-6.columns.large-centered.moveup
-      .panel
-        .row
-          .large-12.columns
-              .large-2.columns
-                a(href="/auth/facebook").fc-webicon.facebook.large
-              .large-2.columns
-                a(href="#").fc-webicon.googleplus.large
-              .large-2.columns
-                 a(href="/auth/facebook").fc-webicon.customlogo.large
-
-          .large-12.columns
-            form(action='/login', method='post')
-              fieldset
-                legend or
-                .row
-                  .large-12.columns
-                    input(type="text", placeholder="Your email id", name='username')
-                .row
-                  .large-10.columns
-                    input(type="password", placeholder="Password", name='password')
-                  a(href="#") (forgot?)
-                .row
-                  .large-12.columns
-                    button.alert.radius(type='submit', value='Login') Sign-in
-                    span    or
-                    a(href="#")    create an account
+            button.alert.radius(type='submit') Sign-in
+            span &nbspor&nbsp;
+            a(href="/signup")   create an account

@@ -6,7 +6,8 @@
 var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , helpers = require('view-helpers')
-  , jshare = require('jshare');
+  , jshare = require('jshare')
+  , flash = require('connect-flash');
 
 module.exports = function (app, config, passport) {
   app.set('showStackError', true)
@@ -32,6 +33,8 @@ module.exports = function (app, config, passport) {
         collection : 'sessions'
       })
     }))
+
+    app.use(flash());
 
     if (passport) {
       app.use(passport.initialize())

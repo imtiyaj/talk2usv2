@@ -12,6 +12,7 @@ exports.signin = function (req, res) {}
  */
 
 exports.authCallback = function (req, res, next) {
+    //store the parameters in local database TBD
     res.redirect('/')
 }
 
@@ -31,7 +32,7 @@ exports.login = function (req, res) {
  */
 
 exports.signup = function (req, res) {
-    res.render('users/signup', {
+    res.render('users/signup-foundation', {
         title: 'Sign up',
         user: new User()
     })

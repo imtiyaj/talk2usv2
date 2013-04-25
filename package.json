@@ -21,7 +21,8 @@
     "passport-facebook": "latest",
     "passport-google-oauth": "latest",
     "socket.io": "latest",
-    "jshare": "latest"
+    "jshare": "latest",
+    "connect-flash": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",

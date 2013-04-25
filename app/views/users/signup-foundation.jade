@@ -1,0 +1,24 @@
+extends auth-foundation
+
+block localauth
+  .large-12.columns
+    form(action="/users", method="post")
+      fieldset
+        legend or
+        .row
+          .large-12.columns
+            input(type="text", placeholder="Full name", name='user.name')
+        .row
+          .large-12.columns
+            input(type="text", placeholder="Your email", name='user.email')
+        .row
+          .large-12.columns
+            input(type="password", placeholder="Password", name='password')
+        .row
+          .large-12.columns
+            input(type="password", placeholder="Retype password", name='retype_password')
+        .row
+          .large-12.columns
+            button.alert.radius(type='submit') Sign up
+            span &nbsp;or&nbsp;
+            a(href="/login")   login
