@@ -34,6 +34,12 @@ module.exports = function (app, passport) {
 
     app.param('userId', users.user)
 
+
+    // entity routes
+    var entities = require('../app/controllers/entities')
+
+    app.get('/entities/new',middlewares.requiresLogin,  entities.new)
+
 }
 
 

@@ -2,9 +2,9 @@ extends auth-foundation
 
 block localauth
   .large-12.columns
+    br
+    h5(style="color:#2ba6cb") or
     form(action="/users", method="post")
-      fieldset
-        legend or
         .row
           .large-12.columns
             input(type="text", placeholder="Full name", name='user.name')

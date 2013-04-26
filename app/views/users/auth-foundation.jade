@@ -1,26 +1,18 @@
 extends ../layouts/layout-foundation
 
 block content
-  .row
-    .large-12.columns
-      .panel.callout
-        .row
-          .large-12.columns
-            a(href='#')
-              h1.text-center Talk2us
-        .row
-          .large-12.columns
-            h4.subheader.text-center Sign-in using
+  include ../includes/thin-header
   .row
     .large-6.columns.large-centered.moveup
       .panel
         .row
-          .large-12.columns
-              .large-2.columns
+          .large-6.columns.large-centered
+              h4.subheader.text-center(style="color:#2ba6cb") Sign-in using
+              .large-4.columns
                 a(href="/auth/facebook").fc-webicon.facebook.large
-              .large-2.columns
+              .large-4.columns
                 a(href="#").fc-webicon.googleplus.large
-              .large-2.columns
+              .large-4.columns
                  a(href="/auth/facebook").fc-webicon.customlogo.large
 
           block localauth

@@ -1,20 +1,22 @@
 extends auth-foundation
 
 block localauth
-  .large-12.columns
-    form(action="/users/session", method='post')
-      fieldset
-        legend or
-        p(style='color:red').error= message
-        .row
-          .large-12.columns
-            input(type="text", placeholder="Your email id", name='email')
-        .row
-          .large-10.columns
-            input(type="password", placeholder="Password", name='password')
-          a(href="#") (forgot?)
-        .row
-          .large-12.columns
-            button.alert.radius(type='submit') Sign-in
-            span &nbspor&nbsp;
-            a(href="/signup")   create an account
+  row
+    .large-12.columns
+        br
+        h5(style="color:#2ba6cb") or
+        form(action="/users/session", method='post')
+            p(style='color:red').error= message
+            .row
+              .large-12.columns
+                input(type="text", placeholder="Your email id", name='email')
+            .row
+              .large-10.columns
+                input(type="password", placeholder="Password", name='password')
+              a(href="#") forgot?
+            .row
+              .large-12.columns
+                button.alert.radius(type='submit') Sign-in
+                span &nbspor&nbsp;
+                a(href="/signup")   create an account
+

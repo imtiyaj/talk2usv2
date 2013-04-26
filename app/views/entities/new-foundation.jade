@@ -1,0 +1,25 @@
+extends ../layouts/layout-foundation
+
+block content
+  include ../includes/thin-header
+  .row
+    .large-6.columns.large-centered.moveup
+      .panel
+        .row
+          .large-12.columns
+            h4.subheader.text-center(style="color:#2ba6cb") Register your site
+            form(action="/users", method="post")
+              .row
+                .large-12.columns
+                  input(type="text", placeholder="Site URL", name='user.name')
+              .row
+                .large-12.columns
+                  input(type="text", placeholder="Site name", name='user.email')
+              .row
+                .large-12.columns
+                  small You can log in at shortname.talk2us.com
+                  input(type='text', name="", placeholder='Site short name')
+              .row
+                .large-12.columns
+                   button.alert.radius(type='submit') Continue
+
