@@ -32,6 +32,11 @@ require('./config/express')(app, config, passport)
 // Bootstrap routes
 require('./config/routes')(app, passport)
 
+//Bootstrap socket.io
+var socket = require('./app/controllers/socket')
+io.sockets.on('connection', socket);
+//Add authorise and Loglevel for socketio TBD
+
 // Start the app by listening on <port>
 var port = process.env.PORT || 8080
 server.listen(port, function() {

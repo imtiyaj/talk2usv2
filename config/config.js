@@ -3,7 +3,7 @@ module.exports = {
     root: require('path').normalize(__dirname + '/..'),
     db: 'mongodb://localhost/talk2us',
     app: {
-      name: 'Test'
+      name: 'Talk2us'
     },
     facebook: {
       clientID: '558449554176735',

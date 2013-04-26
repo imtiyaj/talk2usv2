@@ -5,14 +5,20 @@
 var mongoose = require('mongoose')
     , User = mongoose.model('User')
 
-exports.signin = function (req, res) {}
+exports.signin = function (req, res) {}     //used
 
 /**
  * Auth callback
  */
 
 exports.authCallback = function (req, res, next) {
-    res.redirect('/')
+    var redirect_to = req.session.redirect_to ? req.session.redirect_to : '/';
+    delete req.session.redirect_to;
+
+    if (req.query.redirect_to)
+        redirect_to = req.query.redirect_to;
+
+    res.redirect(redirect_to);
 }
 
 /**
@@ -51,7 +57,13 @@ exports.logout = function (req, res) {
  */
 
 exports.session = function (req, res) {
-    res.redirect('/')
+    var redirect_to = req.session.redirect_to ? req.session.redirect_to : '/';
+    delete req.session.redirect_to;
+
+    if (req.query.redirect_to)
+        redirect_to = req.query.redirect_to;
+
+    res.redirect(redirect_to);
 }
 
 /**
@@ -98,18 +110,3 @@ exports.user = function (req, res, next, id) {
             next()
         })
 }
-
-
-//app.get('/login', function(req, res) {
-//    var redirect_to = req.session.redirect_to ? req.session.redirect_to : '/';
-//    delete req.session.redirect_to;
-//
-//    if (req.query.redirect_to)
-//        redirect_to = req.query.redirect_to;
-//
-//    if (req.user) {
-//        res.redirect(redirect_to);
-//    } else {
-//        res.render('login-foundation');
-//    }
-//});
