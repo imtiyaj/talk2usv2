@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     root: require('path').normalize(__dirname + '/..'),
-    db: 'mongodb://localhost/TestDev',
+    db: 'mongodb://localhost/talk2us',
     app: {
       name: 'Test'
     },

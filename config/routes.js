@@ -1,15 +1,11 @@
-
-/**
- * Module dependencies.
- */
-
+//Module stores all the routes, add dependecies in the beginning
 var mongoose = require('mongoose')
-  , middlewares = require('./middlewares')
+    , middlewares = require('./middlewares')
 
 module.exports = function (app, passport) {
 
-  var home = require('../app/controllers/home')
-  app.get('/', home.index)
+    var home = require('../app/controllers/home')
+    app.get('/', home.index)
 
     // user routes
     var users = require('../app/controllers/users')
@@ -42,31 +38,6 @@ module.exports = function (app, passport) {
 
 
 
-
-//app.get('/login', function(req, res) {
-//    var redirect_to = req.session.redirect_to ? req.session.redirect_to : '/';
-//    delete req.session.redirect_to;
-//
-//    if (req.query.redirect_to)
-//        redirect_to = req.query.redirect_to;
-//
-//    if (req.user) {
-//        res.redirect(redirect_to);
-//    } else {
-//        res.render('login-foundation');
-//    }
-//});
-//app.get('/logout', function(req, res) {
-//    req.logout();
-//    res.redirect('/');
-//});
-//
-//app.post('/login',
-//    passport.authenticate('local', { failureRedirect: '/login' }),
-//    function(req, res) {
-//        res.redirect('/');
-//    });
-//
 
 
 

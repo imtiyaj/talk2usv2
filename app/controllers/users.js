@@ -12,7 +12,6 @@ exports.signin = function (req, res) {}
  */
 
 exports.authCallback = function (req, res, next) {
-    //store the parameters in local database TBD
     res.redirect('/')
 }
 
@@ -44,7 +43,7 @@ exports.signup = function (req, res) {
 
 exports.logout = function (req, res) {
     req.logout()
-    res.redirect('/login')
+    res.redirect('/')
 }
 
 /**
@@ -99,3 +98,18 @@ exports.user = function (req, res, next, id) {
             next()
         })
 }
+
+
+//app.get('/login', function(req, res) {
+//    var redirect_to = req.session.redirect_to ? req.session.redirect_to : '/';
+//    delete req.session.redirect_to;
+//
+//    if (req.query.redirect_to)
+//        redirect_to = req.query.redirect_to;
+//
+//    if (req.user) {
+//        res.redirect(redirect_to);
+//    } else {
+//        res.render('login-foundation');
+//    }
+//});

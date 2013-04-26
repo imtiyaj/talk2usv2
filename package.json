@@ -22,7 +22,8 @@
     "passport-google-oauth": "latest",
     "socket.io": "latest",
     "jshare": "latest",
-    "connect-flash": "latest"
+    "connect-flash": "latest",
+    "underscore": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",

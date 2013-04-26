@@ -23,11 +23,11 @@ block content
           ul.right
             li
               if locals.user
-                if locals.user.display
-                  username = user.display
+                if locals.user.name
+                  username = user.name
                 else
-                  username = user.userid
-                a.button.large.dropdown(data-dropdown='logged-dropdown', href='#', color='#2ba6cb', border-color='#2284a1')= username
+                  username = user.username
+                button.dropdown(data-dropdown='logged-dropdown', href='#', color='#2ba6cb', border-color='#2284a1')= username
               else
                 button(onClick="window.location='/login?redirect_to=/'") Sign-in
               ul#logged-dropdown.f-dropdown(data-dropdown-content=" ")
