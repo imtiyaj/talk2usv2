@@ -4,8 +4,14 @@ var mongoose = require('mongoose')
 
 module.exports = function (app, passport) {
 
+    app.get("*", function(req, res, next){
+        console.log('subdomains: '+req.subdomains);
+        next();
+    });
+
     var home = require('../app/controllers/home')
     app.get('/', home.index)
+    app.get('/admin',middlewares.requiresLogin, home.admin)
 
     // user routes
     var users = require('../app/controllers/users')
@@ -39,6 +45,7 @@ module.exports = function (app, passport) {
     var entities = require('../app/controllers/entities')
 
     app.get('/entities/new',middlewares.requiresLogin,  entities.new)
+    app.post('/entities',middlewares.requiresLogin,  entities.create)
 
 }
 

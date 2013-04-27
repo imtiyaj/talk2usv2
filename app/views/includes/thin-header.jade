@@ -1,7 +1,32 @@
-.row
-    .large-12.columns
-        .panel.callout
-            .row
-                .large-12.columns
-                    a(href='#')
-                        h1.text-center Talk2us
+
+nav.top-bar
+    ul.title-area
+        // Title Area
+        li.name
+            h1
+                a(href='#') Talk2us
+        // Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+        li.toggle-topbar.menu-icon
+            a(href='#')
+                span Menu
+    section.top-bar-section
+        ul.right
+            li
+                a(ng-click='toggleWidgetWindow()') Demo
+            li
+                a FAQ
+            if locals.user
+                if locals.user.name
+                    username = user.name
+                else
+                    username = user.email
+                li.has-dropdown
+                    a( href='#')= username
+                    ul.dropdown
+                        li
+                            a(href='#') Settings
+                        li
+                            a(href='/logout') Sign out
+            else
+                li
+                    a( href='/login?redirect_to=/') Sign-in

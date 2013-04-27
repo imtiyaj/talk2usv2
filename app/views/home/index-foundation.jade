@@ -2,45 +2,15 @@ extends ../layouts/layout-foundation
 
 block content
  div(ng-controller='ChatCtrl')
-  .row
-    .large-12.columns
-      .panel.callout
-        nav.top-bar
-          ul.title-area
-            // Title Area
-            li.name
-              h1
-                a(href='#') Talk2us
-            // Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
-            li.toggle-topbar.menu-icon
-              a(href='#')
-                span Menu
-          section.top-bar-section
-            ul.right
-              li
-                a(ng-click='toggleWidgetWindow()') Demo
-              li
-                a FAQ
-              if locals.user
-                if locals.user.name
-                  username = user.name
-                else
-                  username = user.email
-                li.has-dropdown
-                  a( href='#')= username
-                  ul.dropdown
-                    li
-                      a(href='#') Settings
-                    li
-                      a(href='/logout') Sign out
-              else
-                li
-                  a( href='/login?redirect_to=/') Sign-in
-        .row
-          .large-7.columns
-            h2.subheader In-place, real-time conversations for your website.
-          .large-4.columns
-              a(href='/entities/new').button.alert.right  Start conversations for your site
+    .row
+        .large-12.columns
+            .panel.callout
+                include ../includes/thin-header
+                .row
+                  .large-7.columns
+                    h2.subheader In-place, real-time conversations for your website.
+                  .large-4.columns
+                      a(href='/entities/new').button.alert.right  Start conversations for your site
 
 
   .row(ng-show = "showWidgets")
