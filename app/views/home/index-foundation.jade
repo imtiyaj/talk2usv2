@@ -1,6 +1,7 @@
 extends ../layouts/layout-foundation
 
 block content
+ div(ng-controller='ChatCtrl')
   .row
     .large-12.columns
       .panel.callout
@@ -17,7 +18,7 @@ block content
           section.top-bar-section
             ul.right
               li
-                a Demo
+                a(ng-click='toggleWidgetWindow()') Demo
               li
                 a FAQ
               if locals.user
@@ -26,7 +27,7 @@ block content
                 else
                   username = user.email
                 li.has-dropdown
-                  a( href='#', color='#2ba6cb', border-color='#2284a1')= username
+                  a( href='#')= username
                   ul.dropdown
                     li
                       a(href='#') Settings
@@ -42,7 +43,7 @@ block content
               a(href='/entities/new').button.alert.right  Start conversations for your site
 
 
-  .row(ng-controller='ChatCtrl')
+  .row(ng-show = "showWidgets")
     .large-12.columns
       .row.collapse
         .large-4.columns

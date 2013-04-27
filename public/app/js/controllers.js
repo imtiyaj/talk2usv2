@@ -120,6 +120,10 @@ angular.module('talk2us.controllers', []).
             sendRoom('provider');
             rtc.open({role: 'provider', audio: true, video: true}, rtcEvents);
         }
+        $scope.showWidgets = false;
+        $scope.toggleWidgetWindow = function() {
+             $scope.showWidgets = !($scope.showWidgets);
+        }
   }])
   .controller('QueueCtrl', [function() {
 
