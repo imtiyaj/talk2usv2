@@ -9,9 +9,7 @@ var mongoose = require('mongoose');
  */
 
 exports.new = function(req, res){
-    res.render('entities/new-foundation', {
-
-    })
+    res.render('entities/new-foundation');
 }
 
 exports.create = function(req, res){

@@ -4,22 +4,26 @@ nav.top-bar
         // Title Area
         li.name
             h1
-                a(href='#') Talk2us
+                a(href='/') Talk2us
         // Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
         li.toggle-topbar.menu-icon
             a(href='#')
                 span Menu
     section.top-bar-section
         ul.right
-            li
-                a(ng-click='toggleWidgetWindow()') Demo
-            li
-                a FAQ
+
             if locals.user
+                //menu depending on user role
                 if locals.user.name
                     username = user.name
                 else
                     username = user.email
+                li
+                    a(href="#") Start taking calls
+                li
+                    a(href="/admin") Manage
+                li
+                    a(href="/admin") Dashboard
                 li.has-dropdown
                     a( href='#')= username
                     ul.dropdown
@@ -28,5 +32,9 @@ nav.top-bar
                         li
                             a(href='/logout') Sign out
             else
+                li
+                    a(ng-click='toggleWidgetWindow()') Demo
+                li
+                    a FAQ
                 li
                     a( href='/login?redirect_to=/') Sign-in

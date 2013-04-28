@@ -1,7 +1,10 @@
 extends ../layouts/layout-foundation
 
 block content
-  include ../includes/thin-header
+  .row
+    .large-12.columns
+        .panel.callout
+            include ../includes/thin-header
   .row
     .large-6.columns.large-centered.moveup
       .panel
@@ -9,15 +12,17 @@ block content
           .large-12.columns
             h4.subheader.text-center(style="color:#2ba6cb") Register your site
             form(action="/entities", method="post")
-              .row
-                .large-12.columns
-                  input(type="text", placeholder="Site URL", name='user.name')
+              .row.collapse
+                  .large-2.columns
+                    span.prefix http://
+                  .large-10.columns
+                    input(type="text", placeholder="Site URL", name='user.name')
               .row
                 .large-12.columns
                   input(type="text", placeholder="Site name", name='user.email')
               .row
                 .large-12.columns
-                  small You can log in at shortname.talk2us.com
+                  small Select a short name so that you can log in at shortname.talk2us.com
                   input(type='text', name="", placeholder='Site short name')
               .row
                 .large-12.columns
