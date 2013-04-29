@@ -13,127 +13,127 @@ block content
                       a(href='/entities/new').button.alert.right  Start conversations for your site
 
 
-  .row(ng-show = "showWidgets")
-    .large-12.columns
-      .row.collapse
-        .large-4.columns
-          .contain-to-grid
-            .button-bar
-              ul.button-group
-                li
-                  i.icon-user.icon-2x(style='color:green')
-                li
-                  &nbsp
-                li
-                  span(style='color:white') Login using
-          .row
+    .row(ng-show = "showWidgets")
+       .large-12.columns
+         .row.collapse
+           .large-4.columns
+             .contain-to-grid
+               .button-bar
+                 ul.button-group
+                   li
+                     i.icon-user.icon-2x(style='color:green')
+                   li
+                     &nbsp
+                   li
+                     span(style='color:white') Login using
+             .row
+               br
+             div.button-bar
+               ul.button-group
+                 li &nbsp
+               ul.button-group
+                 li
+                   a(href="/auth/facebook").fc-webicon.facebook
+               ul.button-group
+                 li
+                   a(href="#").fc-webicon.googleplus
+               ul.button-group
+                 li
+                   a(href="/auth/facebook").fc-webicon.customlogo
+             .large-12.columns
+                form(action='/login', method='post')
+                  fieldset(style='margin:0')
+                   legend or
+                   .row
+                     .large-12.columns
+                       input(type="text", placeholder="Your email id", name='username')
+                   .row
+                     .large-8.columns
+                       input(type="password", placeholder="Password", name='password')
+                     a(href="#")  (forgot?)
+                   .row
+                     .large-12.columns
+                       button.alert.small.radius(type='submit', value='Login', style='margin:0') Sign-in
+                       span    or
+                       a(href="#")    create an account
+           .large-4.columns
+             .contain-to-grid
+               .button-bar
+                 ul.button-group
+                     li
+                       button.widget-button.small
+                           i.icon-facetime-video.icon-large(style='color:green')
+                     li
+                         button.widget-button.small
+                           i.icon-volume-off.icon-large(style='color:red')
+                 ul.button-group.right(style='margin-right:0')
+                   li
+                       button.widget-button.small
+                         i.icon-resize-small.icon-large(style='color:green')
+                   li
+                       button.widget-button.small(ng-click='connect()')
+                         i.icon-phone.icon-large(style='color:blue')
+
+               .videopanel
+                 video(ng-src='{{mainstream}}', autoplay='autoplay', height='240px', width='320px')
+               .panel(style='position:absolute;top:190px;left:195px;height:80px;width:120px;padding:0px;')
+                 video(ng-src='{{smallstream}}', autoplay='autoplay', height='80px', width='120px')
+           .large-4.columns
+               .contain-to-grid
+                   .button-bar
+                     ul.button-group.right(style='margin-right:0')
+                       li
+                         button.widget-button.small
+                           i.icon-remove.icon-large(style='color:red')
+                   .videopanel(style='height:212px; margin:0px; overflow-y:scroll')
+                     p(ng-repeat='message in messages') {{message.user}}: {{message.text}}
+                   .row.collapse
+                       form(ng-submit='sendMessage()')
+                         .large-9.columns
+                           input(type="text", placeholder="Send a message", name='msg',style='margin:0px',
+                              ng-model='message')
+                         .large-3.columns
+                           button.alert.small.radius(type='submit', value='Login', style='width:100%;margin:0;') Send
+
+
+
+
+    .row
+      .large-6.columns
+        h3 Increase conversion rates, Reduce support costs for your websites
+        p
+          | Talk2Us enables you to provide "Click-to-Call" service from your online portal. Customer can talk with your customer representative or send a message anytime from your portal. This is done right from the browser and there is no need of any software or plug-in installation.
+        p
+          | Transform your customer experience and build great customer connections by providing instant access to your company representative. Close the deals and help the customer to take immmediate decisons. Think of it as having a virtual sales representative at your portal and providing customized buying expereince to the user.
+      .large-6.columns
+        div
+          br
+        .flex-video
+          iframe(width='560', height='315', src='http://www.youtube.com/embed/YDh76tT8T1s', frameborder='0', allowfullscreen='')
+    .row
+      .large-12.columns
+        hr
+    .row
+      .large-4.columns
+        .panel
+          h3.subheader Easy to get started
+          img(src='app/img/customer_service.png')
+          p
             br
-          div.button-bar
-            ul.button-group
-              li &nbsp
-            ul.button-group
-              li
-                a(href="/auth/facebook").fc-webicon.facebook
-            ul.button-group
-              li
-                a(href="#").fc-webicon.googleplus
-            ul.button-group
-              li
-                a(href="/auth/facebook").fc-webicon.customlogo
-          .large-12.columns
-             form(action='/login', method='post')
-               fieldset(style='margin:0')
-                legend or
-                .row
-                  .large-12.columns
-                    input(type="text", placeholder="Your email id", name='username')
-                .row
-                  .large-8.columns
-                    input(type="password", placeholder="Password", name='password')
-                  a(href="#")  (forgot?)
-                .row
-                  .large-12.columns
-                    button.alert.small.radius(type='submit', value='Login', style='margin:0') Sign-in
-                    span    or
-                    a(href="#")    create an account
-        .large-4.columns
-          .contain-to-grid
-            .button-bar
-              ul.button-group
-                  li
-                    button.widget-button.small
-                        i.icon-facetime-video.icon-large(style='color:green')
-                  li
-                      button.widget-button.small
-                        i.icon-volume-off.icon-large(style='color:red')
-              ul.button-group.right(style='margin-right:0')
-                li
-                    button.widget-button.small
-                      i.icon-resize-small.icon-large(style='color:green')
-                li
-                    button.widget-button.small(ng-click='connect()')
-                      i.icon-phone.icon-large(style='color:blue')
+            | Create a contact center for your campaign and add representatives who can answer the calls. You can configure the widgets for them which provide host of information like history of conversation, campaign/product information, previous resolutions and even integration with your CRM
+      .large-4.columns
+        .panel
+          h3.subheader Straight from browser
+          img(src='app/img/webrtc.png')
+          p
+            br
+            | Talk2Us uses WebRTC to provide real-time audio/video communication right from user's browser. Unlike other video chat applications, webRTC does not need any third party applications. With webRTC you are not stuck with a proprietory solution and with the future-proof technology.
+      .large-4.columns
+        .panel
+          h3.subheader Rich Media chat
+          img(src='app/img/rmchat.png')
+          p
+            br
+            | Browser based rich media chat enables sharing of screen-shots, product pictures while you are on the call. Other than text chats, users and customer representatives can share location information to enable service center identification and share pictures from the camera or screenshot.
 
-            .videopanel
-              video(ng-src='{{mainstream}}', autoplay='autoplay', height='240px', width='320px')
-            .panel(style='position:absolute;top:190px;left:195px;height:80px;width:120px;padding:0px;')
-              video(ng-src='{{smallstream}}', autoplay='autoplay', height='80px', width='120px')
-        .large-4.columns
-            .contain-to-grid
-                .button-bar
-                  ul.button-group.right(style='margin-right:0')
-                    li
-                      button.widget-button.small
-                        i.icon-remove.icon-large(style='color:red')
-                .videopanel(style='height:212px; margin:0px; overflow-y:scroll')
-                  p(ng-repeat='message in messages') {{message.user}}: {{message.text}}
-                .row.collapse
-                    form(ng-submit='sendMessage()')
-                      .large-9.columns
-                        input(type="text", placeholder="Send a message", name='msg',style='margin:0px',
-                           ng-model='message')
-                      .large-3.columns
-                        button.alert.small.radius(type='submit', value='Login', style='width:100%;margin:0;') Send
-
-
-
-
-  .row
-    .large-6.columns
-      h3 Increase conversion rates, Reduce support costs for your websites
-      p
-        | Talk2Us enables you to provide "Click-to-Call" service from your online portal. Customer can talk with your customer representative or send a message anytime from your portal. This is done right from the browser and there is no need of any software or plug-in installation.
-      p
-        | Transform your customer experience and build great customer connections by providing instant access to your company representative. Close the deals and help the customer to take immmediate decisons. Think of it as having a virtual sales representative at your portal and providing customized buying expereince to the user.
-    .large-6.columns
-      div
-        br
-      .flex-video
-        iframe(width='560', height='315', src='http://www.youtube.com/embed/YDh76tT8T1s', frameborder='0', allowfullscreen='')
-  .row
-    .large-12.columns
-      hr
-  .row
-    .large-4.columns
-      .panel
-        h3.subheader Easy to get started
-        img(src='app/img/customer_service.png')
-        p
-          br
-          | Create a contact center for your campaign and add representatives who can answer the calls. You can configure the widgets for them which provide host of information like history of conversation, campaign/product information, previous resolutions and even integration with your CRM
-    .large-4.columns
-      .panel
-        h3.subheader Straight from browser
-        img(src='app/img/webrtc.png')
-        p
-          br
-          | Talk2Us uses WebRTC to provide real-time audio/video communication right from user's browser. Unlike other video chat applications, webRTC does not need any third party applications. With webRTC you are not stuck with a proprietory solution and with the future-proof technology.
-    .large-4.columns
-      .panel
-        h3.subheader Rich Media chat
-        img(src='app/img/rmchat.png')
-        p
-          br
-          | Browser based rich media chat enables sharing of screen-shots, product pictures while you are on the call. Other than text chats, users and customer representatives can share location information to enable service center identification and share pictures from the camera or screenshot.
-
-  include ../includes/footer
+   include ../includes/footer

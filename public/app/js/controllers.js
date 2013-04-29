@@ -124,7 +124,14 @@ angular.module('talk2us.controllers', []).
         $scope.toggleWidgetWindow = function() {
              $scope.showWidgets = !($scope.showWidgets);
         }
+
+
   }])
-  .controller('QueueCtrl', [function() {
+  .controller('AdminCtrl', ['$scope',function($scope) {
+        $scope.users = [{name: "Ravi1", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
+            {name: "Ravi2", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
+            {name: "Ravi3", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
+            {name: "Ravi4", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
+            {name: "Ravi5", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"}];
 
   }]);

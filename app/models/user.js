@@ -21,7 +21,10 @@ var UserSchema = new Schema({
   hashed_password: String,
   salt: String,
   facebook: {},
-  google: {}
+  google: {},
+
+  active: Boolean,
+  enterprises: [{enterprise:String,role:String}]
 })
 
 /**

@@ -1,6 +1,7 @@
 extends ../layouts/layout-foundation
 
 block content
+ div(ng-controller="AdminCtrl")
   .row
     .large-12.columns
         .panel.callout
@@ -15,25 +16,24 @@ block content
             li
                 a(href="#") Manage Site
             li.divider
-            li
+            li.active
                 a(href="#") Manage Providers
 
-    .large-6.columns
-        table
+    .large-10.columns
+      table(width='100%')
             thead
                 tr
-                    th(width="100") Table Header
-                    th Table Header
-                    th(width="100") Table Header
-                    th(width="100") Table Header
+                    th(width="25%").text-center User Name
+                    th(width="40%").text-center Email
+                    th(width="10%").text-center Role
+                    th(width="20%").text-center Logged-in via
+                    th(width="5%")
+                        button.button.small Add
             tbody
-                tr
-                    td Content goes here
-                    td Content goes here
-                    td Content goes here
-                    td Content goes here
+                tr(ng-repeat="user in users", edit-user="user")
 
-    .large-4.columns
+
+    //.large-4.columns
         h6 Title of Side Panel
         form
             fieldset

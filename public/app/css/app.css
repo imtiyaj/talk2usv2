@@ -5637,3 +5637,19 @@ table tfoot tr td {
 .videopanel h1.subheader, .videopanel h2.subheader, .videopanel h3.subheader, .videopanel h4.subheader, .videopanel h5.subheader, .videopanel h6.subheader {
   line-height: 1.4;
 }
+
+/* CSS goes here */
+/* line 73, ../../sass/app.scss */
+.edit-in-place input {
+  display: none;
+}
+
+/* line 77, ../../sass/app.scss */
+.edit-in-place.active span {
+  display: none;
+}
+
+/* line 81, ../../sass/app.scss */
+.edit-in-place.active input {
+  display: inline-block;
+}
