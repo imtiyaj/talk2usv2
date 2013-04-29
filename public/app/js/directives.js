@@ -86,12 +86,13 @@ angular.module('talk2us.directives', []).
         restrict: 'EA',
         scope: { user: '=editUser' },
         template:
-            '<th edit-in-place="user.name" editing="editing" clickable="true"></th> | ' +
-                '<th edit-in-place="user.email" editing="editing"></th> | ' +
-                '<th edit-in-place="user.role" editing="editing"></th> | ' +
-                '<th edit-in-place="user.provider" editing="editing"></th> | ' +
+            '<th edit-in-place="user.name"></th> | ' +
+                '<th edit-in-place="user.email"></th> | ' +
+                '<th edit-in-place="user.role" editing="editing" clickable="true"></th> | ' +
+                '<th edit-in-place="user.provider" ></th> | ' +
                 '<th style="display:none" showonhoverparent>' +
-                    '<a class="button tiny" ng-click="edit()">Remove</a></th>',
+                    '<a class="button tiny left" ng-click="edit()">Edit</a>'  +
+                    '<a class="button tiny right" ng-show="!editing" ng-click="">Remove</a></th>',
         link: function ( $scope, element, attrs ) {
             $scope.edit = function() {
                 var button = angular.element( element.children()[4].children[0] );

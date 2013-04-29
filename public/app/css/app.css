@@ -5564,12 +5564,37 @@ table tfoot tr td {
   max-width: 800px;
 }
 
-/* line 50, ../../sass/app.scss */
+/* line 10, ../../sass/_sticky-footer.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 12, ../../sass/_sticky-footer.scss */
+#root {
+  clear: both;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -66px;
+}
+/* line 18, ../../sass/_sticky-footer.scss */
+#root #root_footer {
+  height: 66px;
+}
+
+/* line 20, ../../sass/_sticky-footer.scss */
+#footer {
+  clear: both;
+  position: relative;
+  height: 66px;
+}
+
+/* line 53, ../../sass/app.scss */
 .top-bar .name h1 a {
   padding: 0 0;
 }
 
-/* line 57, ../../sass/app.scss */
+/* line 60, ../../sass/app.scss */
 .widget-button {
   border-style: solid;
   border-width: 1px;
@@ -5601,13 +5626,13 @@ table tfoot tr td {
   color: white;
 }
 
-/* line 62, ../../sass/app.scss */
+/* line 65, ../../sass/app.scss */
 .moveup {
   margin-top: -50px;
   z: 100;
 }
 
-/* line 67, ../../sass/app.scss */
+/* line 70, ../../sass/app.scss */
 .videopanel {
   border-style: solid;
   border-width: 1px;
@@ -5639,17 +5664,17 @@ table tfoot tr td {
 }
 
 /* CSS goes here */
-/* line 73, ../../sass/app.scss */
+/* line 76, ../../sass/app.scss */
 .edit-in-place input {
   display: none;
 }
 
-/* line 77, ../../sass/app.scss */
+/* line 80, ../../sass/app.scss */
 .edit-in-place.active span {
   display: none;
 }
 
-/* line 81, ../../sass/app.scss */
+/* line 84, ../../sass/app.scss */
 .edit-in-place.active input {
   display: inline-block;
 }

@@ -44,6 +44,9 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
+@import "sticky-footer";
+@include sticky-footer(66px);
+
 .top-bar {
   .name {
     h1 {

@@ -1,21 +1,24 @@
 extends ../layouts/layout-foundation
 
 block content
-  .row
-    .large-12.columns
-        .panel.callout
-            include ../includes/thin-header
-  .row
-    .large-6.columns.large-centered.moveup
-      .panel
-        .row
-          .large-6.columns.large-centered
-              h4.subheader.text-center(style="color:#2ba6cb") Please sign-in using
-              .large-4.columns
-                a(href="/auth/facebook").fc-webicon.facebook.large
-              .large-4.columns
-                a(href="#").fc-webicon.googleplus.large
-              .large-4.columns
-                 a(href="/auth/facebook").fc-webicon.customlogo.large
+  #root
+      .row
+        .large-12.columns
+            .panel.callout
+                include ../includes/thin-header
+      .row
+        .large-6.columns.large-centered.moveup
+          .panel
+            .row
+              .large-6.columns.large-centered
+                  h4.subheader.text-center(style="color:#2ba6cb") Please sign-in using
+                  .large-4.columns
+                    a(href="/auth/facebook").fc-webicon.facebook.large
+                  .large-4.columns
+                    a(href="#").fc-webicon.googleplus.large
+                  .large-4.columns
+                     a(href="/auth/facebook").fc-webicon.customlogo.large
 
-          block localauth
+              block localauth
+      #root_footer
+  include ../includes/footer

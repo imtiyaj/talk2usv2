@@ -1,63 +1,64 @@
 extends ../layouts/layout-foundation
 
 block content
- div(ng-controller="AdminCtrl")
-  .row
-    .large-12.columns
-        .panel.callout
-            include ../includes/thin-header
-  .row
-    .large-2.columns
-        ul.side-nav
-            //add partials and use ajax requests to get data
-            li
-                a(href="#") Site Statistics
-            li.divider
-            li
-                a(href="#") Manage Site
-            li.divider
-            li.active
-                a(href="#") Manage Providers
+    div#root(ng-controller="AdminCtrl")
+      .row
+        .large-12.columns
+            .panel.callout
+                include ../includes/thin-header
+      .row
+        .large-2.columns
+            ul.side-nav
+                //add partials and use ajax requests to get data
+                li
+                    a(href="#") Site Statistics
+                li.divider
+                li
+                    a(href="#") Manage Site
+                li.divider
+                li.active
+                    a(href="#") Manage Providers
 
-    .large-10.columns
-      table(width='100%')
-            thead
-                tr
-                    th(width="25%").text-center User Name
-                    th(width="40%").text-center Email
-                    th(width="10%").text-center Role
-                    th(width="20%").text-center Logged-in via
-                    th(width="5%")
-                        button.button.small Add
-            tbody
-                tr(ng-repeat="user in users", edit-user="user")
+        .large-10.columns
+          table(width='100%')
+                thead
+                    tr
+                        th(width="20%").text-center User Name
+                        th(width="35%").text-center Email
+                        th(width="15%").text-center Role
+                        th(width="15%").text-center Logged-in via
+                        th(width="15%")
+                            button.button.small Add
+                tbody
+                    tr(ng-repeat="user in users", edit-user="user")
+      #root_footer
 
 
-    //.large-4.columns
-        h6 Title of Side Panel
-        form
-            fieldset
-                .row
-                    .large-12.columns
-                        label Input Label
-                        input(type="text", placeholder="placeholder")
-                .row
-                    .large-4.columns
-                        label Label
-                        input(type="text", placeholder="placeholder")
-                    .large-8.columns
-                        .row.collapse
+        //.large-4.columns
+            h6 Title of Side Panel
+            form
+                fieldset
+                    .row
+                        .large-12.columns
+                            label Input Label
+                            input(type="text", placeholder="placeholder")
+                    .row
+                        .large-4.columns
                             label Label
-                            .small-4.columns
-                                span.prefix.button http://
-                            .small-8.columns
-                                input(type="text", placeholder="placeholder")
-                .row
-                    .large-12.columns
-                        label Textarea
-                        textarea( placeholder="textarea")
-                .row
-                    .large-12.columns
-                        button.small.alert.radius.right(type='submit') Update
+                            input(type="text", placeholder="placeholder")
+                        .large-8.columns
+                            .row.collapse
+                                label Label
+                                .small-4.columns
+                                    span.prefix.button http://
+                                .small-8.columns
+                                    input(type="text", placeholder="placeholder")
+                    .row
+                        .large-12.columns
+                            label Textarea
+                            textarea( placeholder="textarea")
+                    .row
+                        .large-12.columns
+                            button.small.alert.radius.right(type='submit') Update
 
-  include ../includes/footer
+    include ../includes/footer
