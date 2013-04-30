@@ -39,7 +39,8 @@ exports.login = function (req, res) {
 exports.signup = function (req, res) {
     res.render('users/signup-foundation', {
         title: 'Sign up',
-        user: new User()
+        user: new User(),
+        message: req.flash('error')
     })
 }
 
@@ -75,7 +76,8 @@ exports.create = function (req, res) {
     user.provider = 'local'
     user.save(function (err) {
         if (err) {
-            return res.render('users/signup', { errors: err.errors, user: user })
+            req.flash('error', err.message);
+            return res.render('users/signup-foundation', { errors: req.flash('error'), user: user })
         }
         req.logIn(user, function(err) {
             if (err) return next(err)

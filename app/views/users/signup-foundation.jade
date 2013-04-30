@@ -5,12 +5,13 @@ block localauth
     br
     h5(style="color:#2ba6cb") or
     form(action="/users", method="post")
+        p(style='color:red').error= message
         .row
           .large-12.columns
-            input(type="text", placeholder="Full name", name='name')
+            input(type="text", placeholder="Full name", name='name', value=user.name)
         .row
           .large-12.columns
-            input(type="text", placeholder="Your email", name='email')
+            input(type="text", placeholder="Your email", name='email', value=user.email)
         //.row
           .large-12.columns
             input(type='text', name="username", placeholder='Username', value=user.username)
