@@ -13,18 +13,19 @@ block content
               .large-12.columns
                 h4.subheader.text-center(style="color:#2ba6cb") Register your site
                 form(action="/entities", method="post")
+                  p(style='color:red').error= message
                   .row.collapse
                       .large-2.columns
                         span.prefix http://
                       .large-10.columns
-                        input(type="text", placeholder="Site URL", name='user.name')
+                        input(type="text", placeholder="Site URL", name='url', value=entity.url)
                   .row
                     .large-12.columns
-                      input(type="text", placeholder="Site name", name='user.email')
+                      input(type="text", placeholder="Site name", name='name', value=entity.name)
                   .row
                     .large-12.columns
                       small Select a short name so that you can log in at shortname.talk2us.com
-                      input(type='text', name="", placeholder='Site short name')
+                      input(type='text', placeholder='Site short name', name="shortname", value=entity.shortname)
                   .row
                     .large-12.columns
                        button.alert.radius(type='submit') Continue
