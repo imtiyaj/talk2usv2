@@ -7,19 +7,10 @@ block content
             .panel.callout
                 include ../includes/thin-header
       .row
-        .large-2.columns
-            ul.side-nav
-                //add partials and use ajax requests to get data
-                li
-                    a(href="#") Site Statistics
-                li.divider
-                li
-                    a(href="#") Manage Site
-                li.divider
-                li.active
-                    a(href="#") Manage Providers
+        include ../includes/admin-navbar
 
         .large-10.columns
+          h4 Manage Users
           table(width='100%')
                 thead
                     tr

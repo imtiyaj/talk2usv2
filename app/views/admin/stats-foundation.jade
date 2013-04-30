@@ -1,0 +1,17 @@
+extends ../layouts/layout-foundation
+
+block content
+    div#root(ng-controller="AdminCtrl")
+      .row
+        .large-12.columns
+            .panel.callout
+                include ../includes/thin-header
+      .row
+        include ../includes/admin-navbar
+
+        .large-10.columns
+          h4 Site Statistics
+
+      #root_footer
+
+    include ../includes/footer

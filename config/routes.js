@@ -49,7 +49,9 @@ module.exports = function (app, passport) {
     // admin routes
     var admin = require('../app/controllers/admin')
 
-    app.get('/admin',middlewares.requiresLogin, admin.users)
+    app.get('/admin',middlewares.requiresLogin, admin.settings)
+    app.get('/admin/users',middlewares.requiresLogin, admin.users)
+    app.get('/admin/stats',middlewares.requiresLogin, admin.stats)
 
 }
 
