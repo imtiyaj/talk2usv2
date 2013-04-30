@@ -5575,18 +5575,18 @@ html, body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin-bottom: -66px;
+  margin-bottom: -70px;
 }
 /* line 18, ../../sass/_sticky-footer.scss */
 #root #root_footer {
-  height: 66px;
+  height: 70px;
 }
 
 /* line 20, ../../sass/_sticky-footer.scss */
 #footer {
   clear: both;
   position: relative;
-  height: 66px;
+  height: 70px;
 }
 
 /* line 53, ../../sass/app.scss */
