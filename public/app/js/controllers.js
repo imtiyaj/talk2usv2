@@ -133,5 +133,8 @@ angular.module('talk2us.controllers', []).
             {name: "Ravi3", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
             {name: "Ravi4", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
             {name: "Ravi5", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"}];
+        $scope.selectedRole= 'provider';
+
+        $scope.roles=['provider','admin','customer'];
 
   }]);

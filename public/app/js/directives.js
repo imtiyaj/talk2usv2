@@ -84,14 +84,14 @@ angular.module('talk2us.directives', []).
   directive( 'editUser', function () {
     return {
         restrict: 'EA',
-        scope: { user: '=editUser' },
+        scope: { user: '=editUser', roles: '=roles' },
         template:
             '<th edit-in-place="user.name"></th> | ' +
                 '<th edit-in-place="user.email"></th> | ' +
-                '<th edit-in-place="user.role" editing="editing" clickable="true"></th> | ' +
+                '<th><select ng-model="user.role" ng-options="role for role in roles"></select>   </th> | ' +
                 '<th edit-in-place="user.provider" ></th> | ' +
                 '<th style="display:none" showonhoverparent>' +
-                    '<a class="button tiny left" ng-click="edit()">Edit</a>'  +
+                    '<a class="button tiny left" ng-click="edit()">Save</a>'  +
                     '<a class="button tiny right" ng-show="!editing" ng-click="">Remove</a></th>',
         link: function ( $scope, element, attrs ) {
             $scope.edit = function() {
