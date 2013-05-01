@@ -2,8 +2,19 @@
 
 /* Controllers */
 
-angular.module('talk2us.controllers', []).
-  controller('ChatCtrl', ['$scope', 'socketio', 'webrtc', function($scope, socket, rtc) {
+angular.module('talk2us.controllers', [])
+    .controller('ChatCtrl', ['$scope', 'socketio', 'webrtc', '$window', function($scope, socket, rtc, win) {
+        var userInfo
+          , role = 'client';
+        var debug = function(s) {
+            console.log(s);
+        };
+
+        if (win.shared && win.shared.userinfo && win.shared.userinfo.role) {
+            userInfo = win.shared.userinfo;
+            role = win.shared.userinfo.role;
+            debug('Role defined as ' + role);
+        } 
 
         // Socket listeners
         // ================
@@ -117,8 +128,12 @@ angular.module('talk2us.controllers', []).
         };
 
         $scope.connect = function() {
-            sendRoom('provider');
-            rtc.open({role: 'provider', audio: true, video: true}, rtcEvents);
+            /*
+             * If user not logged in, assume role to be 'client' for demo
+             */
+            debug('sendRoom role is ' + role);
+            sendRoom(role);
+            rtc.open({role: role, audio: true, video: true}, rtcEvents);
         }
         $scope.showWidgets = false;
         $scope.toggleWidgetWindow = function() {

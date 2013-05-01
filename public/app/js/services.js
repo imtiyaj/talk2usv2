@@ -30,8 +30,14 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
     var localStream = null,
         peerConn = null,
         debugEnabled = true,
+        userInfo,
         role = 'client',
         stunServer = 'stun:stun.l.google.com:19302';
+
+        if (win.shared && win.shared.userinfo) {
+            userInfo = win.shared.userinfo;
+            role = win.shared.userinfo.role;
+        }
 
     var nav = win.navigator;
 
@@ -56,12 +62,12 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
                 localStream = stream;
                 registerForPeerMessages();
                 $rootScope.$apply(function () {
-                    callback.apply(this, ['LOCALSTREAM',win.URL.createObjectURL(localStream)]);
+                    eventCallback.apply(this, ['LOCALSTREAM',win.URL.createObjectURL(localStream)]);
                 });
             }, function () {
                 console.log('No permission to access camera/mic');
                 $rootScope.$apply(function () {
-                    callback.apply(this, ['LOCALSTREAM',null]);
+                    eventCallback.apply(this, ['LOCALSTREAM',null]);
                 });
             });
             role = config.role;

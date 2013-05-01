@@ -20,6 +20,8 @@ html.no-js(lang='en', ng-app="talk2us")
     link(rel='stylesheet', href='/app/css/font-awesome.css')
     script(src='/app/lib/vendor/custom.modernizr.js')
     != JShare()
+    script
+      window.shared.userinfo = {role: 'client'};
   body
     block content
     script(src='/socket.io/socket.io.js')
