@@ -56,7 +56,24 @@ EntitySchema.methods = {
 
 EntitySchema.statics = {
 
+    /**
+     * List entities for a user
+     *
+     * @param {Object} options
+     * @param {Function} cb
+     * @api private
+     */
 
+    list: function (options, cb) {
+        var criteria = options.criteria || {}
+
+        this.find(criteria)
+            .populate('user', 'name')
+            .sort({'shortname': 1}) // sort by date
+            .limit(options.perPage)
+            .skip(options.perPage * options.page)
+            .exec(cb)
+    }
 }
 
 mongoose.model('Entity', EntitySchema)
