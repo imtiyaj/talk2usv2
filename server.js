@@ -33,9 +33,10 @@ require('./config/express')(app, config, passport)
 require('./config/routes')(app, passport)
 
 //Bootstrap socket.io
-var socket = require('./app/controllers/socket')
+var socket = require('./app/controllers/socket');
 io.sockets.on('connection', socket);
-//Add authorise and Loglevel for socketio TBD
+io.set('log level', 1);
+//Add authorise for socketio TBD
 
 // Start the app by listening on <port>
 var port = process.env.PORT || 8080

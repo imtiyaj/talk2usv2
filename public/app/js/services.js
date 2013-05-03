@@ -60,7 +60,8 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
         open: function (config, eventCallback) {
             nav.getUserMedia({audio: config.audio, video: config.video}, function(stream){
                 localStream = stream;
-                registerForPeerMessages();
+                registerForPeerMessages(eventCallback);
+                tieup(role, localStream, eventCallback);
                 $rootScope.$apply(function () {
                     eventCallback.apply(this, ['LOCALSTREAM',win.URL.createObjectURL(localStream)]);
                 });
@@ -87,11 +88,9 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
 
                 peerConn.createOffer(function(sessionDescription) {
                     peerConn.setLocalDescription(sessionDescription);
-                    var msg = {};
-                    msg.msg_type = 'OFFER';
-                    msg.data = sessionDescription;
-                    socketio.send(JSON.stringify(msg));
+                    socketio.emit('OFFER', sessionDescription);
                 }, null, sdpConstraints);
+                debug('Client sent offer');
             }
         },
 
@@ -100,22 +99,41 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
         },
 
         close: function(config) {
-            var msg = {};
-            msg.msg_type = 'HANGUP';
-            socketio.send(JSON.stringify(msg));
-
+            socketio.emit('HANGUP', {});
             if (peerConn) {
                 peerConn.close();
             }
         }
     }
 
-    function registerForPeerMessages() {
+    function tieup(role, localStream, callback) {
+        console.log('tieup called');
+        console.log('localStream in tieup is ' + localStream);
+        if (role === 'client' && localStream) {
+            peerConn = createPeerConnection(callback);
+            peerConn.addStream(localStream);
+
+            var sdpConstraints = {'mandatory': {
+                'OfferToReceiveAudio': true,
+                'OfferToReceiveVideo': true
+            }};
+
+
+            peerConn.createOffer(function(sessionDescription) {
+                peerConn.setLocalDescription(sessionDescription);
+                socketio.emit('OFFER', sessionDescription);
+            }, null, sdpConstraints);
+            debug('Client sent offer');
+        }
+    }
+
+    function registerForPeerMessages(callback) {
         socketio.on('OFFER', function (msg) {
             if (role === 'provider') {
-                peerConn = createPeerConnection();
+                debug('Agent received offer');
+                peerConn = createPeerConnection(callback);
                 peerConn.setRemoteDescription(
-                    new RTCSessionDescription(msg.data)
+                    new RTCSessionDescription(msg)
                 );
                 peerConn.addStream(localStream);            //localStream, is it available always?
                 var sdpConstraints = {'mandatory': {
@@ -128,16 +146,19 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
                 debug('Error: OFFER received by CLIENT');
             }
             //indicate controller of message
+            /*
             var args = ['OFFER'].concat(arguments);
             $rootScope.$apply(function () {
                 callback.apply(this, args);
             });
+            */
         });
 
         socketio.on('ANSWER', function (msg) {
             if (role === 'client') {
+                debug('Client received answer: ' + msg);
                 peerConn.setRemoteDescription(
-                    new RTCSessionDescription(msg.data)
+                    new RTCSessionDescription(msg)
                 );
             } else {
                 debug('Error: ANSWER received by PROVIDER');
@@ -159,7 +180,8 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
         });
 
         socketio.on('CANDIDATE', function (msg) {
-            var candidate = new RTCIceCandidate({candidate: msg.candidate});
+            debug('Received CANDIDATE ' + msg);
+            var candidate = new RTCIceCandidate({candidate: msg});
             peerConn.addIceCandidate(candidate);
         });
     }
@@ -173,12 +195,10 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
     function sendAnswer(sessionDescription) {
         peerConn.setLocalDescription(sessionDescription);
         var msg = {};
-        msg.msg_type = 'ANSWER';
-        msg.data = sessionDescription;
-        socketio.send(JSON.stringify(msg));
+        socketio.emit('ANSWER', sessionDescription);
     }
 
-    function createPeerConnection() {
+    function createPeerConnection(callback) {
         var peerConn = new RTCPeerConnection(
             {'iceServers': [{'url': stunServer}]}
         );
@@ -204,10 +224,7 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
         if (event.candidate) {
             debug('Sending ICE candidate to remote peer: ' +
                 event.candidate.candidate);
-            var msgCandidate = {};
-            msgCandidate.msg_type = 'CANDIDATE';
-            msgCandidate.candidate = event.candidate.candidate;
-            socketio.send(JSON.stringify(msgCandidate));
+            socketio.emit('CANDIDATE', event.candidate.candidate);
         } else {
             debug('onIceCandidate: no candidates');
         }

@@ -18,6 +18,7 @@ var UserSchema = new Schema({
   email: String,
   username: String,
   provider: String,
+  role: String,
   hashed_password: String,
   salt: String,
   facebook: {},

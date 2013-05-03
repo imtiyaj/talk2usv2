@@ -77,17 +77,19 @@ angular.module('talk2us.controllers', [])
         var sendRoom = function(role) {
             var msg = {};
             msg.msg_type = 'ROOM';
-            msg.room = 'CHATROOM';
+            msg.room = 'DEMOROOM';
             msg.role = role;
-            socket.emit('ROOM',JSON.stringify(msg));
+            socket.emit('ROOM',msg);
         }
 
-        var rtcEvents = function (args) {
-             switch (args[0]) {
+        var rtcEvents = function () {
+             switch (arguments[0]) {
                  case 'LOCALSTREAM':
-                     $scope.smallstream = args[1];
+                     $scope.smallstream = arguments[1];
+                     break;
                  case 'REMOTESTREAM':
-                     $scope.mainstream = args[1];
+                     $scope.mainstream = arguments[1];
+                     break;
              }
         }
 

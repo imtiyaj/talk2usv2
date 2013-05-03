@@ -48,9 +48,13 @@ var userNames = (function () {
   };
 }());
 
+var connList = [];
+
 // export function for listening to the socket
 module.exports = function (socket) {
-  var name = userNames.getGuestName();
+  var name = userNames.getGuestName()
+    , senderInfo
+    , receiverInfo;
 
   // send the new user their name and a list of users
   socket.emit('init', {
@@ -101,41 +105,51 @@ module.exports = function (socket) {
 
   //adding webRTC related messages
   socket.on('ROOM', function (msg) {
-    debug('New ' + msg.role + ' connection in room ' + msg.room);
-    socket.role = msg.role;
-    socket.room = msg.room;
+    if (getConnInfo(socket)) {
+        debug('ROOM request sent from existing connection');
+        return;
+    }
+    var room = getRoom(msg.url);
+    var connInfo = new ConnInfo(socket, msg.role, room, null);
+    connList.push(connInfo);
+    debug('New ' + msg.role + ' connection in room ' + room);
   });
 
   socket.on('OFFER', function (msg) {
-    if (socket.role !== 'client') {
+    senderInfo = getConnInfo(socket);
+    if (!senderInfo) {
+        debug('Offer received from unknown connection');
+        return;
+    }
+    if (senderInfo.role !== 'client') {
         debug('Exception: only CLIENT can make offer');
         return;
     }
-    debug('Offer from ' + socket.role +
-        ' in room ' + socket.room);
+    debug('Offer from ' + senderInfo.role + ' in room ' + senderInfo.room);
 
     receiverInfo = getAvailableProvider(senderInfo.room);
     if (!receiverInfo) {
         debug('No provider found in room ' + senderInfo.room);
         listConnInfo();
+        socket.emit('NOK', {});
         return;
     }
-    senderInfo.other = receiverInfo.conn;
-    receiverInfo.other = senderInfo.conn;
-    receiverInfo.conn.send(JSON.stringify(msg));
+    senderInfo.other = receiverInfo.socket;
+    receiverInfo.other = senderInfo.socket;
+    receiverInfo.socket.emit('OFFER', msg);
   });
 
   socket.on('ANSWER', function (msg) {
-        senderInfo = getConnInfo(connection);
+        senderInfo = getConnInfo(socket);
         if (!senderInfo) {
             debug('Answer received from unknown connection');
             return;
         }
-        senderInfo.other.send(JSON.stringify(msg));
+        senderInfo.other.emit('ANSWER', msg);
     });
 
   socket.on('CANDIDATE', function (msg) {
-        senderInfo = getConnInfo(connection);
+        senderInfo = getConnInfo(socket);
         if (!senderInfo) {
             debug('Candidate received from unknown connection');
             return;
@@ -144,11 +158,11 @@ module.exports = function (socket) {
             debug('Peer unknown for sending candidate');
             return;
         }
-        senderInfo.other.send(JSON.stringify(msg));
+        senderInfo.other.emit('CANDIDATE', msg);
     });
 
   socket.on('HANGUP', function (msg) {
-        senderInfo = getConnInfo(connection);
+        senderInfo = getConnInfo(socket);
 
     if (!senderInfo) {
         debug('Hangup received from unknown connection');
@@ -159,7 +173,7 @@ module.exports = function (socket) {
         return;
     }
     receiverInfo = getConnInfo(senderInfo.other);
-    senderInfo.other.send(JSON.stringify(msg));
+    senderInfo.other.emit('HANGUP', msg);
     // Remove the pairing information
     if (receiverInfo) {
         receiverInfo.other = null;
@@ -170,16 +184,16 @@ module.exports = function (socket) {
     });
 
 
-  function ConnInfo(connection, role, room, other) {
-      this.conn = connection;
+  function ConnInfo(socket, role, room, other) {
+      this.socket = socket;
       this.role = role;
       this.room = room;
       this.other = other;
   }
 
-  function getConnInfo(conn) {
+  function getConnInfo(socket) {
       for (var i = 0; i < connList.length; i++) {
-          if (connList[i].conn == conn) {
+          if (connList[i].socket == socket) {
               break;
           }
       }
@@ -190,9 +204,9 @@ module.exports = function (socket) {
       }
   }
 
-  function removeConnInfo(conn) {
+  function removeConnInfo(socket) {
       for (var i = 0; i < connList.length; i++) {
-          if (connList[i].conn == conn) {
+          if (connList[i].socket == socket) {
               break;
           }
       }
@@ -224,6 +238,10 @@ module.exports = function (socket) {
       } else {
           return connList[i];
       }
+  }
+  
+  function getRoom(url) {
+      return 'DEMOROOM';
   }
 
     function debug(s) {
