@@ -304,9 +304,9 @@
 
 /* Twitter */
 .no-svg .fc-webicon.twitter { background: url("app/img/fc-webicon-twitter-m.png"); }
-.no-svg .fc-webicon.twitter.large { background: url("app/img/fc-webicon-twitter.png"); }
+.no-svg .fc-webicon.twitter.large { background: url("/app/img/fc-webicon-twitter.png"); }
 .no-svg .fc-webicon.twitter.small { background: url("app/img/fc-webicon-twitter-s.png"); }
-.svg .fc-webicon.twitter { background: url("app/img/fc-webicon-twitter.svg"); }
+.svg .fc-webicon.twitter { background: url("/app/img/fc-webicon-twitter.svg"); }
 
 /* Vimeo */
 .no-svg .fc-webicon.vimeo { background: url("app/img/fc-webicon-vimeo-m.png"); }

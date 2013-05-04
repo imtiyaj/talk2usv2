@@ -5678,3 +5678,13 @@ html, body {
 .edit-in-place.active input {
   display: inline-block;
 }
+
+/* line 88, ../../sass/app.scss */
+.css-form input.ng-invalid.ng-dirty {
+  border: 1px solid #fa787e;
+}
+
+/* line 92, ../../sass/app.scss */
+.css-form input.ng-valid.ng-dirty {
+  border: 1px solid #78fa89;
+}

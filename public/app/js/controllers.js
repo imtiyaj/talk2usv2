@@ -137,14 +137,24 @@ angular.module('talk2us.controllers', [])
             sendRoom(role);
             rtc.open({role: role, audio: true, video: true}, rtcEvents);
         }
+
+        //to show and hide demo
         $scope.showWidgets = false;
         $scope.toggleWidgetWindow = function() {
              $scope.showWidgets = !($scope.showWidgets);
         }
 
 
-  }])
-  .controller('AdminCtrl', ['$scope',function($scope) {
+  }]).
+  controller('SigninCtrl', ['$scope',function($scope) {
+         $scope.checkPassword = function() {
+            $scope.signinForm.retype_password.$error.dontmatch
+                     = $scope.user.password !== $scope.user.retype_password;
+        };
+   }]);
+
+angular.module('talk2usAdmin.controllers', []).
+    controller('AdminCtrl', ['$scope',function($scope) {
         $scope.users = [{name: "Ravi1", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
             {name: "Ravi2", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
             {name: "Ravi3", email: "rbail2000@gmail.com", role:"agent", provider:"facebook"},
@@ -153,5 +163,39 @@ angular.module('talk2us.controllers', [])
         $scope.selectedRole= 'agent';
 
         $scope.roles=['agent','admin','customer'];
+    }]).
+    controller('AdminListCtrl', ['$scope', 'entities', function($scope,entities){
+       $scope.entities = entities;
+    }]).
+    controller('AdminViewCtrl',['$scope', '$location', 'entity', function($scope,$location,entity){
+        $scope.entity = entity;
 
-  }]);
+        $scope.edit = function() {
+            $location.path('/edit/' + entity.id);
+        }
+    }]).
+    controller('AdminEditCtrl', ['$scope','$location', 'entity', function($scope, $location, entity){
+        $scope.entity = entity;
+
+        $scope.save = function(){
+            $scope.entity.$save(function(entity){
+                $location.path('/view'+ entity.id);
+            })
+        }
+
+        $scope.remove = function(){
+            $scope.entity.$remove(function(entity){
+                delete $scope.entity;
+                $location.path('/');
+            })
+        }
+    }]).
+    controller('AdminNewCtrl',['$scope', '$location','Entity',function($scope,$location,Entity){
+        $scope.entity = new Entity();
+
+        $scope.save = function(){
+            $scope.entity.$save(function(entity){
+                $location.path('/view' + entity.id);
+            })
+        }
+    }]);

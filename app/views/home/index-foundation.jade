@@ -1,7 +1,7 @@
 extends ../layouts/layout-foundation
 
 block content
- div(ng-controller='ChatCtrl')
+ div(ng-app="talk2us", ng-controller='ChatCtrl')
     .row
         .large-12.columns
             .panel.callout
@@ -11,6 +11,8 @@ block content
                     h2.subheader In-place, real-time conversations for your website.
                   .large-4.columns
                       a(href='/entities/new').button.alert.right  Start conversations for your site
+                      a(ng-click='toggleWidgetWindow()', style='background-color:grey').button.small.right
+                        |  See a demo
 
 
     .row(ng-show = "showWidgets")

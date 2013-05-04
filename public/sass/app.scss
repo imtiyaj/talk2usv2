@@ -84,3 +84,11 @@
 .edit-in-place.active input {
   display: inline-block;
 }
+
+.css-form input.ng-invalid.ng-dirty {
+  border: 1px solid #FA787E;
+}
+
+.css-form input.ng-valid.ng-dirty {
+  border: 1px solid #78FA89;
+}

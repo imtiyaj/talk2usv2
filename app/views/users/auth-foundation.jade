@@ -1,7 +1,7 @@
 extends ../layouts/layout-foundation
 
 block content
-  #root
+  #root(ng-app="talk2us", ng-controller="SigninCtrl")
       .row
         .large-12.columns
             .panel.callout
@@ -17,7 +17,7 @@ block content
                   .large-4.columns
                     a(href="#").fc-webicon.googleplus.large
                   .large-4.columns
-                     a(href="/auth/facebook").fc-webicon.customlogo.large
+                     a(href="#").fc-webicon.twitter.large
 
               block localauth
       #root_footer

@@ -3,20 +3,22 @@ extends auth-foundation
 block localauth
   row
     .large-12.columns
-        br
-        h5(style="color:#2ba6cb") or
-        form(action="/users/session", method='post')
-            p(style='color:red').error= message
-            .row
-              .large-12.columns
-                input(type="text", placeholder="Your email id", name='email')
-            .row
-              .large-10.columns
-                input(type="password", placeholder="Password", name='password')
+      br
+      h5(style="color:#2ba6cb") or
+      form(name= "loginForm", novalidate,action="/users/session", method='post').css-form
+        p(style='color:red').error= message
+        .row
+          .large-12.columns
+            input(type="email", placeholder="Your registered email id", name='email',ng-model='user.email', required)
+        .row
+          .large-10.columns
+            input(type="password", placeholder="Password", name='password',ng-model='user.password', required)
+          .large-2.columns
+            label.inline
               a(href="#") forgot?
-            .row
-              .large-12.columns
-                button.alert.radius(type='submit') Sign-in
-                span &nbspor&nbsp;
-                a(href="/signup")   create an account
+        .row
+          .large-12.columns
+            button.alert.radius(type='submit') Sign-in
+            span &nbspor&nbsp;
+            a(href="/signup")   create an account
 

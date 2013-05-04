@@ -4,25 +4,43 @@ block localauth
   .large-12.columns
     br
     h5(style="color:#2ba6cb") or
-    form(action="/users", method="post")
-        p(style='color:red').error= message
-        .row
-          .large-12.columns
-            input(type="text", placeholder="Full name", name='name', value=user.name)
-        .row
-          .large-12.columns
-            input(type="text", placeholder="Your email", name='email', value=user.email)
-        //.row
-          .large-12.columns
-            input(type='text', name="username", placeholder='Username', value=user.username)
-        .row
-          .large-12.columns
-            input(type="password", placeholder="Password", name='password')
-        .row
-          .large-12.columns
-            input(type="password", placeholder="Retype password", name='retype_password')
-        .row
-          .large-12.columns
-            button.alert.radius(type='submit') Sign up
-            span &nbsp;or&nbsp;
-            a(href="/login")   login
+    form(name= "signinForm", novalidate, autocomplete="off", action="/users", method="post").css-form
+      p(style='color:red').error= message
+      .row
+        .large-3.columns
+          label.right.inline Name
+        .large-9.columns
+          input(type="text", placeholder="Please enter your name", name='name', ng-model='user.name')
+      .row
+        .large-3.columns
+          label.right.inline Email
+        .large-9.columns
+          input(type="email", placeholder="This will be used as login ID",
+                    name='email',ng-model='user.email', required)
+          small.error(ng-show="signinForm.email.$error.required && signinForm.email.$dirty")
+            | Email is needed for Signing-in
+          //small.error(ng-show="signinForm.email.$error.email && signinForm.email.$dirty")
+            | This is not valid
+      .row
+        .large-3.columns
+          label.right.inline Password
+        .large-9.columns
+          input(type="password", placeholder="Chose a password of minimum 8 characters)", name='password',
+                    ng-model='user.password',ng-required="true", ng-minlength="8",ng-change="checkPassword()")
+          small.error(ng-show="signinForm.password.$error.required && signinForm.password.$dirty")
+              | Please select a password for Signing-in
+          small.error(ng-show="signinForm.password.$error.minlength && signinForm.password.$dirty")
+              | Password need to be atleast 8 characters
+      .row
+        .large-3.columns
+          label.right.inline Re-enter Password
+        .large-9.columns
+          input(type="password", placeholder="Retype the password", name='retype_password',
+                      ng-model='user.retype_password',  ng-required="true", ng-change="checkPassword()")
+          small.error(ng-show="signinForm.retype_password.$error.dontmatch && signinForm.retype_password.$dirty")
+              | Passwords do not match
+      .row
+        .large-9.columns.right
+          button.alert.radius(type='submit',ng-disabled="signinForm.$invalid") Sign up
+          span &nbsp;or&nbsp;
+          a(href="/login")   login
