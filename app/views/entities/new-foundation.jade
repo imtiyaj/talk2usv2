@@ -1,35 +1,37 @@
 extends ../layouts/layout-foundation
 
 block content
- #root
-      .row
-        .large-12.columns
-            .panel.callout
-                include ../includes/thin-header
-      .row
-        .large-6.columns.large-centered.moveup
-          .panel
-            .row
-              .large-12.columns
-                h4.subheader.text-center(style="color:#2ba6cb") Register your site
-                form(action="/entities", method="post")
-                  p(style='color:red').error= message
-                  .row.collapse
-                      .large-2.columns
-                        span.prefix http://
-                      .large-10.columns
-                        input(type="text", placeholder="Site URL", name='url', value=entity.url)
-                  .row
-                    .large-12.columns
-                      input(type="text", placeholder="Site name", name='name', value=entity.name)
-                  .row
-                    .large-12.columns
-                      small Select a short name so that you can log in at shortname.talk2us.com
-                      input(type='text', placeholder='Site short name', name="shortname", value=entity.shortname)
-                  .row
-                    .large-12.columns
-                       button.alert.radius(type='submit') Continue
-      #root_footer
+  #root(ng-app="talk2usAdmin", ng-controller="AdminCtrl")
+    .row
+      .large-12.columns
+        .panel.callout
+          include ../includes/thin-header
+    .row
+      .large-6.columns.large-centered.moveup
+        .panel
+          .row
+            .large-12.columns
+              h4.subheader.text-center(style="color:#2ba6cb") Register your site
+              form(name= "siteForm", novalidate, autocomplete="off", action="/entities", method="post").css-form
+                p(style='color:red').error= message
+                .row.collapse
+                    .large-2.columns
+                      span.prefix http://
+                    .large-10.columns
+                      input(type="text", placeholder="Site URL", name='url',
+                                    ng-model="entity.url", value=entity.url, required)
+                .row
+                  .large-12.columns
+                    input(type="text", placeholder="Site name", name='name', value=entity.name)
+                .row
+                  .large-12.columns
+                    small Select a short name so that you can log in at shortname.talk2us.com
+                    input(type='text', placeholder='Site short name', name="shortname",
+                                    ng-model="entity.shortname", value=entity.shortname, required)
+                .row
+                  .large-12.columns
+                     button.alert.radius(type='submit',ng-disabled="siteForm.$invalid") Continue
+    #root_footer
 
  include ../includes/footer
 
