@@ -11,7 +11,7 @@ table(width='100%')
     tbody
         tr(ng-repeat="entity in entities")
             th
-                a(href="/#/{{entity.id}}") {{entity.shortname}}
+                a(href="#/view/{{entity.id}}") {{entity.shortname}}
             th {{entity.name}}
             th {{entity.url}}
             th

@@ -11,6 +11,7 @@ module.exports = function (app, passport) {
 
     var home = require('../app/controllers/home')
     app.get('/', home.index)
+    app.get('/partials/:module/:name', home.partials);
 
     // user routes
     var users = require('../app/controllers/users')
@@ -42,6 +43,8 @@ module.exports = function (app, passport) {
 
     // entity routes
     var entities = require('../app/controllers/entities')
+
+    app.get('/entities',middlewares.requiresLogin,  entities.index)
 
     app.get('/entities/new',middlewares.requiresLogin,  entities.new)
     app.post('/entities',middlewares.requiresLogin,  entities.create)

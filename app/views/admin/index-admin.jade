@@ -1,0 +1,28 @@
+extends ../layouts/layout-foundation
+
+block content
+  div#root(ng-app="talk2usAdmin")
+    .row
+      .large-12.columns
+          .panel.callout
+              include ../includes/thin-header
+    .row
+      .large-2.columns
+          ul.side-nav
+              li
+                  a(href="#/stats") Site Statistics
+              li.divider
+              li
+                  a(href="#/sites") Manage Site
+              li.divider
+              li
+                  a(href="#/users") Add Roles
+
+      .large-10.columns
+          div(butterbar)
+              .text-center.alert-box.secondary Loading...
+          div(ng-view)
+
+    #root_footer
+
+  include ../includes/footer

@@ -1,0 +1,25 @@
+h4 Manage Users
+table(width='100%')
+    thead
+        tr
+            th(width="20%").text-center User Name
+            th(width="35%").text-center Email
+            th(width="15%").text-center Role
+            th(width="15%").text-center Logged-in via
+            th(width="15%")
+                a.button.small(href="#", data-reveal-id="myModal") Add
+    tbody
+        tr(ng-repeat="user in users", edit-user="user", roles="roles")
+#myModal.reveal-modal.small
+    .row.collapse
+        label Please enter the email ID
+    .large-8.columns
+        input(type="text", placeholder="provider email")
+    .large-4.columns
+        span.prefix.button.alert Submit
+    .row.collapse
+        .large-2.columns
+            label(for="role-field").right Role&nbsp
+        .large-6.left.columns
+            select#role-field(ng-model="selectedRole", ng-options="role for role in roles")
+    a.close-reveal-modal &#215;
