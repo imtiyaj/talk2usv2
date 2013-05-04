@@ -2,7 +2,7 @@
 
 /* Services */
 
-angular.module('talk2us.services', []).
+angular.module('talk2us.services',['ngResource']).
 factory('socketio', function($rootScope){
     var socket = io.connect(null,{'force new connection':true});
     return {
@@ -238,3 +238,31 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
         debug('onSessionOpened ...');
     }
 }]);
+
+angular.module('talk2usAdmin.services',['ngResource']).
+
+    factory('Entity', ['$resource', function($resource) {
+        return $resource('/entities/:id', {id: '@id'}, { query: {method: 'GET', isArray: false }});
+    }]).
+
+    factory('MultiEntityLoader', ['Entity', '$q', function(Entity, $q) {
+        return function() {
+            var delay = $q.defer(); Entity.query(function(entity) {
+                delay.resolve(entity.data.entities); }, function() {
+                delay.reject('Unable to fetch entities');
+            });
+            return delay.promise;
+        };
+    }]).
+
+    factory('EntityLoader', ['Entity', '$route', '$q', function(Entity, $route, $q) {
+        return function() {
+            var delay = $q.defer();
+            Entity.get({id: $route.current.params.entityId}, function(entity) {
+                delay.resolve(entity.data.entity);
+            }, function() {
+                delay.reject('Unable to fetch entity ' + $route.current.params.entityId);
+            });
+            return delay.promise;
+        };
+    }]);
