@@ -5,7 +5,7 @@
 exports.sendSuccess = function (res, msg, data) {
     var out= {};
     out.stat_message= msg;
-    out.children= data;
+    out.data= data;
     out.success= true;
     res.format({
         html: function(){

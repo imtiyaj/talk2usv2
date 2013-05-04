@@ -20,6 +20,7 @@ var EntitySchema = new Schema({
     name: {type : String, default : '', trim : true},
     shortname: {type : String, default : '', trim : true, lowercase: true, unique:true},
     url: {type : String, default : '', trim : true, lowercase: true},
+    code: {type : String, default : '<div id="talk2usclient">Talk to us now!</div>'},
     user: {type : Schema.ObjectId, ref : 'User'},
     createdAt  : {type : Date, default : Date.now}
 })

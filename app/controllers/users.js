@@ -77,7 +77,8 @@ exports.create = function (req, res) {
     user.save(function (err) {
         if (err) {
             req.flash('error', err.message);
-            return res.render('users/signup-foundation', { errors: req.flash('error'), user: user })
+            console.log(err);
+            return res.render('users/signup-foundation', { message: req.flash('error')})
         }
         req.logIn(user, function(err) {
             if (err) return next(err)
