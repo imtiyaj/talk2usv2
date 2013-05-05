@@ -10,11 +10,14 @@ table(width='100%')
                 a.button.small(href='/entities/new') Add
     tbody
         tr(ng-repeat="entity in entities")
-            th
-                a(href="#/view/{{entity.id}}") {{entity.shortname}}
+            th {{entity.shortname}}
             th {{entity.name}}
             th {{entity.url}}
             th
                 small {{entity.code}}
             th(style="display:none", showonhoverparent)
-                a.button.tiny(ng-click="remove()") Remove
+                a.button.tiny(ng-click="remove(entity._id)") Remove
+
+
+//th
+//    a(href="#/view/{{entity._id}}") {{entity.shortname}}

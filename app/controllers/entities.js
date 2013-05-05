@@ -30,6 +30,16 @@ exports.create = function(req, res){
     })
 }
 
+exports.destroy = function(req, res){
+    Entity.findById(req.params.id, function (err, entity) {
+        if (err) return rest.sendError(res,'Unable to find entity to be deleted',err);
+        entity.remove(function(err){
+            if (err) return rest.sendError(res,'Unable to delete entity',err);
+            return rest.sendSuccess(res,'deleted successfully');
+        })
+    });
+}
+
 /**
  * List of Entities
  */

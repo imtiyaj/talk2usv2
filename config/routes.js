@@ -43,15 +43,13 @@ module.exports = function (app, passport) {
 
     // entity routes
     var entities = require('../app/controllers/entities')
-
     app.get('/entities',middlewares.requiresLogin,  entities.index)
-
     app.get('/entities/new',middlewares.requiresLogin,  entities.new)
     app.post('/entities',middlewares.requiresLogin,  entities.create)
+    app.del('/entities/:id', middlewares.requiresLogin, entities.destroy)
 
     // admin routes
     var admin = require('../app/controllers/admin')
-
     app.get('/admin',middlewares.requiresLogin, admin.index)
 }
 

@@ -154,7 +154,21 @@ angular.module('talk2us.controllers', [])
    }]);
 
 angular.module('talk2usAdmin.controllers', []).
-    controller('AdminCtrl', ['$scope',function($scope) {
+    controller('AdminSitesCtrl', ['$scope','entities','Entity',function($scope, entities,Entity) {
+
+        $scope.entities = entities.data.entities;
+
+        $scope.remove = function(id){
+            $scope.entities.forEach(function(entity, index) {
+                if (id === entity._id) {
+                    Entity.remove(id).then(function() {
+                        $scope.entities.splice(index, 1);
+                    });
+                }
+            });
+        }
+    }]).
+    controller('AdminRolesCtrl', ['$scope','entities',function($scope, entities) {
         $scope.users = [{name: "Ravi1", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
             {name: "Ravi2", email: "rbail2000@gmail.com", role:"admin", provider:"facebook"},
             {name: "Ravi3", email: "rbail2000@gmail.com", role:"agent", provider:"facebook"},
@@ -163,39 +177,45 @@ angular.module('talk2usAdmin.controllers', []).
         $scope.selectedRole= 'agent';
 
         $scope.roles=['agent','admin','customer'];
-    }]).
-    controller('AdminListCtrl', ['$scope', 'entities', function($scope,entities){
-       $scope.entities = entities;
-    }]).
-    controller('AdminViewCtrl',['$scope', '$location', 'entity', function($scope,$location,entity){
-        $scope.entity = entity;
 
-        $scope.edit = function() {
-            $location.path('/edit/' + entity.id);
-        }
     }]).
-    controller('AdminEditCtrl', ['$scope','$location', 'entity', function($scope, $location, entity){
-        $scope.entity = entity;
+    controller('AdminStatsCtrl', ['$scope','entities',function($scope, entities) {
 
-        $scope.save = function(){
-            $scope.entity.$save(function(entity){
-                $location.path('/view'+ entity.id);
-            })
-        }
-
-        $scope.remove = function(){
-            $scope.entity.$remove(function(entity){
-                delete $scope.entity;
-                $location.path('/');
-            })
-        }
-    }]).
-    controller('AdminNewCtrl',['$scope', '$location','Entity',function($scope,$location,Entity){
-        $scope.entity = new Entity();
-
-        $scope.save = function(){
-            $scope.entity.$save(function(entity){
-                $location.path('/view' + entity.id);
-            })
-        }
     }]);
+
+
+//    controller('AdminListCtrl', ['$scope', 'entities', function($scope,entities){
+//       $scope.entities = entities;
+//    }]).
+//    controller('AdminViewCtrl',['$scope', '$location', 'entity', function($scope,$location,entity){
+//        $scope.entity = entity;
+//
+//        $scope.edit = function() {
+//            $location.path('/edit/' + entity.id);
+//        }
+//    }]).
+//    controller('AdminEditCtrl', ['$scope','$location', 'entity', function($scope, $location, entity){
+//        $scope.entity = entity;
+//
+//        $scope.save = function(){
+//            $scope.entity.$save(function(entity){
+//                $location.path('/view'+ entity.id);
+//            })
+//        }
+//
+//        $scope.remove = function(){
+//            $scope.entity.$remove(function(entity){
+//                delete $scope.entity;
+//                $location.path('/');
+//            })
+//        }
+//    }]).
+//    controller('AdminNewCtrl',['$scope', '$location','Entity',function($scope,$location,Entity){
+//        $scope.entity = new Entity();
+//
+//        $scope.save = function(){
+//            $scope.entity.$save(function(entity){
+//                $location.path('/view' + entity.id);
+//            })
+//        }
+//    }]);

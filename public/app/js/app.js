@@ -5,9 +5,7 @@
 angular.module('talk2us',
         ['talk2us.filters', 'talk2us.services', 'talk2us.directives', 'talk2us.controllers']).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-    $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.otherwise({redirectTo: '/'});
   }]);
 
 
@@ -18,53 +16,55 @@ angular.module('talk2usAdmin',
         $routeProvider.
             when('/sites', {
                 templateUrl: '/partials/admin/_sites',
-                controller: 'AdminListCtrl',
+                controller: 'AdminSitesCtrl',
                 resolve: {
-                    entities: function(MultiEntityLoader) {
-                        return MultiEntityLoader();
+                    entities: function(Entity) {
+                        return Entity.query();
                     }
                 }
             }).when('/users', {
                 templateUrl: '/partials/admin/_roles',
-                controller: 'AdminCtrl',
+                controller: 'AdminRolesCtrl',
                 resolve: {
-                    entities: function(MultiEntityLoader) {
-                        return MultiEntityLoader();
+                    entities: function(Entity) {
+                        return Entity.query();
                     }
                 }
             }).when('/stats', {
                 templateUrl: '/partials/admin/_stats',
-                controller: 'AdminCtrl',
+                controller: 'AdminStatsCtrl',
                 resolve: {
-                    entities: function(MultiEntityLoader) {
-                        return MultiEntityLoader();
-                    }
-                }
-            }).when('/edit/:entityId', {
-                templateUrl: '/views/entityForm.html',
-                controller: 'AdminEditCtrl',
-                resolve: {
-                    entity: function(EntityLoader) {
-                        return EntityLoader();
-                    }
-                }
-            }).when('/view/:entityId', {
-                templateUrl: '/views/viewEntity.html',
-                controller: 'AdminViewCtrl',
-                resolve: {
-                    entity: function(EntityLoader) {
-                        return EntityLoader();
-                    }
-                }
-            }).when('/new', {
-                templateUrl: '/views/entityForm.html',
-                controller: 'AdminNewCtrl',
-                resolve: {
-                    entity: function(EntityLoader) {
-                        return EntityLoader();
+                    entities: function(Entity) {
+                        return Entity.query();
                     }
                 }
             }).otherwise({redirectTo:'/sites'});
     }]);
+
+
+//}).when('/edit/:entityId', {
+//    templateUrl: '/views/entityForm.html',
+//    controller: 'AdminEditCtrl',
+//    resolve: {
+//        entity: function(EntityLoader) {
+//            return EntityLoader();
+//        }
+//    }
+//}).when('/view/:entityId', {
+//        templateUrl: '/views/viewEntity.html',
+//        controller: 'AdminViewCtrl',
+//        resolve: {
+//            entity: function(EntityLoader) {
+//                return EntityLoader();
+//            }
+//        }
+//    }).when('/new', {
+//        templateUrl: '/views/entityForm.html',
+//        controller: 'AdminNewCtrl',
+//        resolve: {
+//            entity: function(EntityLoader) {
+//                return EntityLoader();
+//            }
+//        }
 
 

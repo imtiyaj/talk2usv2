@@ -241,28 +241,68 @@ factory('webrtc', [ "$rootScope",  "$window", "socketio", function($rootScope, w
 
 angular.module('talk2usAdmin.services',['ngResource']).
 
-    factory('Entity', ['$resource', function($resource) {
-        return $resource('/entities/:id', {id: '@id'}, { query: {method: 'GET', isArray: false }});
-    }]).
+    factory('Entity', ['$http','$q', function($http, $q){
+        var baseUrl = '/entities/';
+        return {
+            query: function() {
+                //create our deferred object.
+                var deferred = $q.defer();
 
-    factory('MultiEntityLoader', ['Entity', '$q', function(Entity, $q) {
-        return function() {
-            var delay = $q.defer(); Entity.query(function(entity) {
-                delay.resolve(entity.data.entities); }, function() {
-                delay.reject('Unable to fetch entities');
-            });
-            return delay.promise;
-        };
-    }]).
+                //make the call.
+                $http.get(baseUrl).success(function(data) {
+                    //when data is returned resolve the deferment.
+                    deferred.resolve(data);
+                }).error(function(){
+                    //or reject it if there's a problem.
+                    deferred.reject();
+                });
 
-    factory('EntityLoader', ['Entity', '$route', '$q', function(Entity, $route, $q) {
-        return function() {
-            var delay = $q.defer();
-            Entity.get({id: $route.current.params.entityId}, function(entity) {
-                delay.resolve(entity.data.entity);
-            }, function() {
-                delay.reject('Unable to fetch entity ' + $route.current.params.entityId);
-            });
-            return delay.promise;
-        };
+                //return the promise that work will be done.
+                return deferred.promise;
+
+            },
+            remove: function(entityId) {
+                //create our deferred object.
+                var deferred = $q.defer();
+
+                //make the call.
+                $http.delete(baseUrl+entityId).success(function(data) {
+                    //when data is returned resolve the deferment.
+                    deferred.resolve(data);
+                }).error(function(){
+                    //or reject it if there's a problem.
+                    deferred.reject();
+                });
+
+                //return the promise that work will be done.
+                return deferred.promise;
+            }
+        }
     }]);
+
+//    factory('Entity', ['$resource', function($resource) {
+//        return $resource('/entities/:id', {id: '@_id'}, { query: {method: 'GET', isArray: false },
+//                                        removeOne: {method:'POST'}});
+//    }]).
+//
+//    factory('MultiEntityLoader', ['Entity', '$q', function(Entity, $q) {
+//        return function() {
+//            var delay = $q.defer(); Entity.query(function(entity) {
+//                delay.resolve(entity); }, function() {
+//                delay.reject('Unable to fetch entities');
+//            });
+//            return delay.promise;
+//        };
+//    }]).
+//
+//    factory('EntityLoader', ['Entity', '$route', '$q', function(Entity, $route, $q) {
+//        return function() {
+//            var delay = $q.defer();
+//            Entity.get({id: $route.current.params.entityId}, function(entity) {
+//                delay.resolve(entity);
+//            }, function() {
+//                delay.reject('Unable to fetch entity ' + $route.current.params.entityId);
+//            });
+//            return delay.promise;
+//        };
+//    }]);
