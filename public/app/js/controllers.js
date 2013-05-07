@@ -144,6 +144,24 @@ angular.module('talk2us.controllers', [])
              $scope.showWidgets = !($scope.showWidgets);
         }
 
+        $scope.myMsg = [
+            { date: '21 April 13',
+                msg:[
+                    {user:'Calvin',time:'12:30PM',text:'Mom suggested the slogan "Before you cross look each way.. and you shall get home safe each day"'  },
+                    {user:'Hobbes',time:'12:31PM', text:"That's kind of catchy"},
+                    {user:"Calvin",time:'12:32PM', text:"But, I like my idea better"}
+                ]
+            },
+            { date: '24 April 13',
+                msg:[
+                    {user:'Calvin',text:'Mom suggested the slogan "Before you cross look each way.. and you shall get home safe each day"', time:"13:30PM"  },
+                    {user:'Hobbes',time:"13:31PM", text:"That's kind of catchy"},
+                    {user:"Calvin",time:"13:32PM", text:"But, I like my idea better"}
+                ]
+            }
+
+        ];
+
 
   }]).
   controller('SigninCtrl', ['$scope',function($scope) {

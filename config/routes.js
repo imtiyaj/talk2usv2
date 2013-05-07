@@ -48,6 +48,9 @@ module.exports = function (app, passport) {
     app.post('/entities',middlewares.requiresLogin,  entities.create)
     app.del('/entities/:id', middlewares.requiresLogin, entities.destroy)
 
+    var support = require('../app/controllers/support')
+    app.get('/support/talk2us', support.talk2us)
+
     // admin routes
     var admin = require('../app/controllers/admin')
     app.get('/admin',middlewares.requiresLogin, admin.index)
